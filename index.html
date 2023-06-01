@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BOOGLE</title>
+  <style>
+    /* Styles for web search results */
+    
+    .search-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .search-input {
+      width: 400px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 4px 0 0 4px;
+      border: none;
+    }
+
+    .search-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      background-color: #4285f4;
+      color: #fff;
+      cursor: pointer;
+    }
+    .web-search-results {
+      margin-bottom: 40px;
+    }
+
+    .web-result-item {
+      margin-bottom: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .web-result-title {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: #4285f4;
+    }
+
+    .web-result-link {
+      color: #4285f4;
+      text-decoration: none;
+    }
+
+    .web-result-link:hover {
+      text-decoration: underline;
+    }
+
+    .web-result-description {
+      margin: 10px 0;
+    }
+
+    /* Styles for image search results */
+    .image-search-results {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .image-result-item {
+      width: 200px;
+      margin: 10px;
+    }
+
+    .image-result-thumbnail {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Unrestricted Image and search engine</h1>
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Enter your search query" />
+    <button onclick="search()" class="search-button">Search</button>
+  </div>
+
+  <div id="webSearchResults" class="web-search-results"></div>
+  <div id="imageSearchResults" class="image-search-results"></div>
+
+  <script>
+    async function search() {
+      const searchQuery = document.getElementById('searchInput').value;
+      const encodedQuery = encodeURIComponent(searchQuery);
+
+      // Web search
+      const webSearchUrl = `https://bing-web-search1.p.rapidapi.com/search?q=${encodedQuery}&mkt=en-us&safeSearch=Off&textFormat=Raw&freshness=Day`;
+      const webSearchOptions = {
+        method: 'GET',
+        headers: {
+          'X-BingApis-SDK': 'true',
+          'X-RapidAPI-Key': '3b143502a0mshe887b77a672d0b8p10626cjsnaf8a412d73d3',
+          'X-RapidAPI-Host': 'bing-web-search1.p.rapidapi.com'
+        }
+      };
+
+      // Image search
+      const imageSearchUrl = `https://bing-image-search1.p.rapidapi.com/images/search?q=${encodedQuery}`;
+      const imageSearchOptions = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': '3b143502a0mshe887b77a672d0b8p10626cjsnaf8a412d73d3',
+          'X-RapidAPI-Host': 'bing-image-search1.p.rapidapi.com'
+        }
+      };
+
+      try {
+        // Perform web search
+        const webSearchResponse = await fetch(webSearchUrl, webSearchOptions);
+        const webSearchResult = await webSearchResponse.json();
+        displayWebResults(webSearchResult);
+
+        // Perform image search
+        const imageSearchResponse = await fetch(imageSearchUrl, imageSearchOptions);
+        const imageSearchResult = await imageSearchResponse.json();
+        displayImageResults(imageSearchResult);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    function displayWebResults(result) {
+      const webSearchResultsDiv = document.getElementById('webSearchResults');
+      webSearchResultsDiv.innerHTML = '';
+
+      let results;
+
+      if (result.webPages && result.webPages.value.length > 0) {
+        results = result.webPages.value;
+      } else if (result.value && result.value.length > 0) {
+        results = result.value;
+      }
+
+      if (!results || results.length === 0) {
+        webSearchResultsDiv.innerHTML = '<p class="no-results">No web results found.</p>';
+        return;
+      }
+
+      results.forEach((item) => {
+        const title = document.createElement('h3');
+        title.className = 'web-result-title';
+        title.textContent = item.name;
+
+        const link = document.createElement('a');
+        link.className = 'web-result-link';
+        link.href = item.url;
+        link.textContent = item.url;
+
+        const description = document.createElement('p');
+        description.className = 'web-result-description';
+        description.textContent = item.snippet;
+
+        const resultDiv = document.createElement('div');
+        resultDiv.className = 'web-result-item';
+        resultDiv.appendChild(title);
+        resultDiv.appendChild(link);
+        resultDiv.appendChild(description);
+
+        webSearchResultsDiv.appendChild(resultDiv);
+      });
+    }
+
+    function displayImageResults(result) {
+      const imageSearchResultsDiv = document.getElementById('imageSearchResults');
+      imageSearchResultsDiv.innerHTML = '';
+
+      let results;
+
+      if (result.value && result.value.length > 0) {
+        results = result.value;
+      }
+
+      if (!results || results.length === 0) {
+        imageSearchResultsDiv.innerHTML = '<p class="no-results">No image results found.</p>';
+        return;
+      }
+
+      results.forEach((item) => {
+        const thumbnailUrl = item.thumbnailUrl;
+
+        if (thumbnailUrl) {
+          const thumbnail = document.createElement('img');
+          thumbnail.className = 'image-result-thumbnail';
+          thumbnail.src = thumbnailUrl;
+          thumbnail.alt = 'Image';
+          thumbnail.title = item.name;
+
+          const resultDiv = document.createElement('div');
+          resultDiv.className = 'image-result-item';
+          resultDiv.appendChild(thumbnail);
+
+          imageSearchResultsDiv.appendChild(resultDiv);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
