@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Watching Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .video {
+            width: 560px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .video:hover {
+            transform: translateY(-5px);
+        }
+
+        .video iframe {
+            width: 100%;
+            height: 315px;
+        }
+
+        .video h2 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #f44336;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+    <script>
+        // Caching mechanism using JavaScript Map
+        const cache = new Map();
+
+        async function fetchYouTubeResults() {
+            const query = document.getElementById('searchQuery').value;
+            const encodedQuery = encodeURIComponent(query);
+            const url = `https://youtube-search-results.p.rapidapi.com/youtube-search/?q=${encodedQuery}`;
+            const options = {
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Key': '3b143502a0mshe887b77a672d0b8p10626cjsnaf8a412d73d3',
+                    'X-RapidAPI-Host': 'youtube-search-results.p.rapidapi.com'
+                }
+            };
+
+            try {
+                if (cache.has(query)) {
+                    // Retrieve data from cache if available
+                    const result = cache.get(query);
+                    displayResults(result);
+                } else {
+                    const response = await fetch(url, options);
+                    const result = await response.json();
+                    console.log(result);
+                    // Cache the data for future use
+                    cache.set(query, result);
+                    displayResults(result);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        function displayResults(result) {
+            const videosContainer = document.getElementById('videosContainer');
+            videosContainer.innerHTML = ''; // Clear previous results
+
+            result.items.forEach(item => {
+                const videoTitle = item.title;
+                const videoId = item.id;
+                const videoUrl = `https://www.youtube.com/embed/${videoId}`;
+
+                const video = document.createElement('div');
+                video.classList.add('video');
+
+                const iframe = document.createElement('iframe');
+                iframe.src = videoUrl;
+                iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+                iframe.setAttribute('allowfullscreen', '');
+
+                const title = document.createElement('h2');
+                title.textContent = videoTitle;
+
+                video.appendChild(iframe);
+                video.appendChild(title);
+
+                videosContainer.appendChild(video);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" id="searchQuery" class="search-input" placeholder="Search YouTube">
+        <button onclick="fetchYouTubeResults()" class="search-button">Fetch YouTube Results</button>
+    </div>
+
+    <div class="container" id="videosContainer"></div>
+</body>
+</html>
