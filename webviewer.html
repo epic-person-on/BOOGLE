@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-container input[type=text] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+        }
+        
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+        
+        .frame-container {
+            margin-top: 20px;
+        }
+        
+        .frame-container iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Website Viewer</h1>
+    <div class="form-container">
+        <form onsubmit="loadWebsite(); return false;">
+            <input type="text" id="urlInput" placeholder="Enter website URL">
+            <button type="submit">Load Website</button>
+        </form>
+    </div>
+    <div class="frame-container">
+        <iframe id="frame" src="" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        function loadWebsite() {
+            var url = document.getElementById("urlInput").value;
+            var frame = document.getElementById("frame");
+            frame.src = url;
+        }
+    </script>
+</body>
+</html>
