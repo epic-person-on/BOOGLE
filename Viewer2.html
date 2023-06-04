@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Base64 Encoded Link Viewer</title>
+</head>
+<body>
+  <h1>Base64 Encoded Link Viewer</h1>
+
+  <iframe id="myFrame" width="100%" height="500"></iframe>
+
+  <script>
+    // Function to decode the Base64 encoded link
+    function decodeBase64Link(encodedLink) {
+      var decodedLink = atob(encodedLink);
+      return decodedLink;
+    }
+
+    // Get the Base64 encoded link from the URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var encodedLink = urlParams.get('link');
+
+    // Decode the Base64 link and set it as the source for the iframe
+    var decodedLink = decodeBase64Link(encodedLink);
+    document.getElementById('myFrame').src = decodedLink;
+  </script>
+</body>
+</html>
