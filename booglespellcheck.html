@@ -25,17 +25,16 @@
       resize: vertical;
     }
     
-    .spellcheck-container {
-      max-width: 500px;
-      margin: 0 auto;
-    }
+   
   </style>
 </head>
 <body>
-  <div class="spellcheck-container">
+  <grammarly-editor-plugin>
+
     <h1>Spell Check</h1>
-    <textarea id="textInput" rows="10" placeholder="Type or paste your text here"></textarea>
-  </div>
+    <textarea id="textInput" rows="10" columns-"30" placeholder="Type or paste your text here"></textarea>
+  </grammarly-editor-plugin>
+
   
   <script src="https://cdn.jsdelivr.net/npm/@grammarly/editor-sdk?clientId=client_APqHT7xcD7om4jmF5WtCXB"></script>
 </body>
