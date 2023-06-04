@@ -93,34 +93,11 @@
     nav .search-container {
       justify-content: center;
     }
-    .widget {
-      display: inline-block;
-      padding: 10px;
-      background-color: #4CAF50;
-      color: white;
-      border-radius: 5px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
 
-    .widget:hover {
-      background-color: #45a049;
-    }
 
-    .widget-container {
-      display: flex;
-      align-items: center;
-    }
+   
 
-    .widget-input {
-      margin-right: 10px;
-      padding: 5px;
-      border-radius: 3px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
+   
   </style>
 </head>
 <body>
@@ -140,20 +117,14 @@
   </div>
      <h1>Unristricted image and news search</h1>
 </center>
-  <div class="widget-container">
-    <input class="widget-input" type="text" id="linkInput" placeholder="Enter URL">
-    <div class="widget" onclick="openLink()">Open Link</div>
-  </div>
+
   <div id="webSearchResults" class="web-search-results"></div>
   <div id="imageSearchResults" class="image-search-results"></div>
   
 
 
   <script>
-     function openLink() {
-      var url = document.getElementById('linkInput').value;
-      window.open(url, '_blank');
-    }
+    
     async function search() {
       const searchQuery = document.getElementById('searchInput').value;
       const encodedQuery = encodeURIComponent(searchQuery);
@@ -218,7 +189,7 @@
 
         const link = document.createElement('a');
         link.className = 'web-result-link';
-        link.href = "https://www.epic-person-on.github.io/BOOGLE/viewer2" + '?link=' + btoa(item.url);
+        link.href = "https://www.epic-person-on.github.io/BOOGLE/Viewer2" + '?link=' + btoa(item.url);
         link.textContent = item.url;
 
         const description = document.createElement('p');
