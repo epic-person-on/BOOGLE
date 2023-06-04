@@ -12,21 +12,31 @@
     
     h1 {
       text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      resize: vertical;
     }
     
-
+    .spellcheck-container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
   </style>
 </head>
 <body>
-  <h1>Spell Check</h1>
-  <grammarly-editor-plugin>
-  <textarea id="textInput" rows="10" cols="50"></textarea>
-  </grammarly-editor-plugin>
-
+  <div class="spellcheck-container">
+    <h1>Spell Check</h1>
+    <textarea id="textInput" rows="10" placeholder="Type or paste your text here"></textarea>
+  </div>
   
-
-  
+  <script src="https://cdn.jsdelivr.net/npm/@grammarly/editor-sdk?clientId=client_APqHT7xcD7om4jmF5WtCXB"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/@grammarly/editor-sdk?clientId=client_APqHT7xcD7om4jmF5WtCXB"></script>
-
 </html>
