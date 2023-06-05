@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Boogle spell check</title>
+  <title>Spell Check Website</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -115,11 +115,11 @@
 
           errors.forEach(function(error) {
             const tokenText = error.word;
-            const suggestions = error.suggestions;
+            const suggestion = error.suggestions[0];
 
             const tokenResult = document.createElement('div');
             tokenResult.classList.add('tokenResult');
-            tokenResult.innerHTML = '<strong>' + tokenText + '</strong> (Corrects to: <em>' + suggestions.join(', ') + '</em>)';
+            tokenResult.innerHTML = '<strong>' + tokenText + '</strong> (Corrects to: <em>' + suggestion + '</em>)';
             resultContainer.appendChild(tokenResult);
           });
         });
