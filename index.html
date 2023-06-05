@@ -94,7 +94,28 @@
       justify-content: center;
     }
 
+       .dropdown {
+      position: relative;
+      display: inline-block;
+    }
 
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      min-width: 160px;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
    
 
    
@@ -102,7 +123,14 @@
 </head>
 <body>
   <nav>
-     <a href="page.html"><img src="Screenshot 2023-06-02 9.48.24 AM.png"/></a>
+<div class="dropdown">
+<img src=""/>
+  <div class="dropdown-content">
+    <a href="bnake.html">bnake</a>
+    <a href="booglespellcheck.html">Spell Check</a>
+    <a href="boutube.html">Boutube</a>
+  </div>
+</div>
   </nav>
     <br>
   </body>
