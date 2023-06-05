@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Spell Check Website</title>
+  <title>Boogle spell check</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -62,7 +62,7 @@
   </style>
 </head>
 <body>
-  <h1>Spell Check</h1>
+  <h1>Boogle Spell Check</h1>
   <textarea id="textInput" rows="10" cols="50"></textarea>
   <button id="checkButton">Check Spelling</button>
   <div id="resultContainer"></div>
@@ -109,15 +109,19 @@
       const resultContainer = document.getElementById('resultContainer');
       resultContainer.innerHTML = '';
 
-      if (result.spellcheck && result.spellcheck.length > 0) {
-        result.spellcheck.forEach(function(token) {
-          const tokenText = token.word;
-          const suggestions = token.suggestions;
+      if (result.elements && result.elements.length > 0) {
+        result.elements.forEach(function(element) {
+          const errors = element.errors;
 
-          const tokenResult = document.createElement('div');
-          tokenResult.classList.add('tokenResult');
-          tokenResult.innerHTML = '<strong>' + tokenText + '</strong> (Corrects to: <em>' + suggestions.join(', ') + '</em>)';
-          resultContainer.appendChild(tokenResult);
+          errors.forEach(function(error) {
+            const tokenText = error.word;
+            const suggestions = error.suggestions;
+
+            const tokenResult = document.createElement('div');
+            tokenResult.classList.add('tokenResult');
+            tokenResult.innerHTML = '<strong>' + tokenText + '</strong> (Corrects to: <em>' + suggestions.join(', ') + '</em>)';
+            resultContainer.appendChild(tokenResult);
+          });
         });
       } else {
         const noErrorsMessage = document.createElement('div');
