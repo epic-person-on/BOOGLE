@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Translation Website</title>
+  <style>
+    /* CSS Styles */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Translation Website</h1>
+    <form id="translation-form" class="form">
+      <label for="text-input" class="label">Text to Translate:</label>
+      <input type="text" id="text-input" class="input" required>
+      
+      <div class="languages-container">
+        <div class="language">
+          <label for="source-language" class="label">Source Language:</label>
+          <input type="text" id="source-language" class="input" placeholder="Enter source language code, e.g., en" required>
+        </div>
+        
+        <div class="language">
+          <label for="target-language" class="label">Target Language:</label>
+          <input type="text" id="target-language" class="input" placeholder="Enter target language code, e.g., es" required>
+        </div>
+      </div>
+      
+      <button type="submit" class="button">Translate</button>
+    </form>
+    <div id="translation-result" class="result"></div>
+  </div>
+
+  <script>
+    // JavaScript code
+    const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2';
+    const options = {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'Accept-Encoding': 'application/gzip',
+        'X-RapidAPI-Key': '3b143502a0mshe887b77a672d0b8p10626cjsnaf8a412d73d3',
+        'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+      },
+      body: new URLSearchParams({
+        q: '',
+        target: 'es',
+        source: 'en'
+      })
+    };
+
+    const translationForm = document.getElementById('translation-form');
+    const textInput = document.getElementById('text-input');
+    const sourceLanguageInput = document.getElementById('source-language');
+    const targetLanguageInput = document.getElementById('target-language');
+    const translationResult = document.getElementById('translation-result');
+
+    translationForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      options.body.set('q', textInput.value);
+      options.body.set('source', sourceLanguageInput.value);
+      options.body.set('target', targetLanguageInput.value);
+
+      try {
+        const response = await fetch(url, options);
+        const result = await response.text();
+        translationResult.textContent = result;
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  </script>
+</body>
+</html>
