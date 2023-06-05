@@ -64,50 +64,15 @@
   <body>
   <h1>Spell Check</h1>
   <textarea id="textInput" rows="10" cols="50"></textarea>
-  <button id="checkButton">Check Spelling</button>
-  <div id="resultContainer"></div>
+
   
-  <script>
-    document.getElementById('checkButton').addEventListener('click', async function() {
-      const inputText = document.getElementById('textInput').value;
-      
-      const url = 'https://bing-spell-check2.p.rapidapi.com/spellcheck?mode=proof&text=' + encodeURIComponent(inputText);
-      
-      const options = {
-        method: 'GET',
-        headers: {
-          'X-RapidAPI-Key': '3b143502a0mshe887b77a672d0b8p10626cjsnaf8a412d73d3',
-          'X-RapidAPI-Host': 'bing-spell-check2.p.rapidapi.com'
-        }
-      };
 
-      try {
-        const response = await fetch(url, options);
-        const result = await response.json();
-        console.log(result);
-        displayResult(result);
-      } catch (error) {
-        console.error(error);
-      }
-    });
+    <!-- Perfect Tense Script-->
+    <script src="https://cdn.jsdelivr.net/npm/perfecttense-editor@latest/dist/pte.umd.js">
+    </script>
 
-    function displayResult(result) {
-      const resultContainer = document.getElementById('resultContainer');
-      resultContainer.innerHTML = '';
-
-      result.flaggedTokens.forEach(function(token) {
-        const tokenOffset = token.offset;
-        const tokenText = token.token;
-        const suggestions = token.suggestions.map(function(suggestion) {
-          return suggestion.suggestion;
-        });
-
-        const tokenResult = document.createElement('div');
-        tokenResult.classList.add('tokenResult');
-        tokenResult.innerHTML = '<strong>' + tokenText + '</strong> (Corrects to: <em>' + suggestions.join(', ') + '</em>)';
-        resultContainer.appendChild(tokenResult);
-      });
-    }
-  </script>
+    <script>
+      PerfectTenseEditor({ clientId: "647e615766d5543d93ce09b9" });
+    </script>
 </body>
 </html>
