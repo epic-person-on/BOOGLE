@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Boogle Spellcheck</title>
+  <title>Spell Check Website</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,31 +12,112 @@
     
     h1 {
       text-align: center;
-      color: #333;
-      margin-bottom: 30px;
     }
-
-    textarea {
+    
+    #textInput {
       width: 100%;
       padding: 10px;
       font-size: 16px;
-      border-radius: 4px;
       border: 1px solid #ccc;
+      border-radius: 4px;
       resize: vertical;
     }
     
-   
+    #checkButton {
+      display: block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    #checkButton:hover {
+      background-color: #45a049;
+    }
+    
+    #resultContainer {
+      margin-top: 20px;
+    }
+    
+    .tokenResult {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    
+    .tokenResult strong {
+      color: #FF4500;
+    }
+    
+    .tokenResult em {
+      color: #888;
+    }
   </style>
 </head>
 <body>
+  <h1>Spell Check</h1>
+  <textarea id="textInput" rows="10" cols="50"></textarea>
+  <button id="checkButton">Check Spelling</button>
+  <div id="resultContainer"></div>
+  
+  <script>
+    document.getElementById('checkButton').addEventListener('click', async function() {
+      const inputText = document.getElementById('textInput').value;
+      
+      const url = 'https://jspell-checker.p.rapidapi.com/check';
+      
+      const options = {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'X-RapidAPI-Key': '3b143502a0mshe887b77a672d0b8p10626cjsnaf8a412d73d3',
+          'X-RapidAPI-Host': 'jspell-checker.p.rapidapi.com'
+        },
+        body: JSON.stringify({
+          language: 'enUS',
+          fieldvalues: inputText,
+          config: {
+            forceUpperCase: false,
+            ignoreIrregularCaps: false,
+            ignoreFirstCaps: true,
+            ignoreNumbers: true,
+            ignoreUpper: false,
+            ignoreDouble: false,
+            ignoreWordsWithNumbers: true
+          }
+        })
+      };
 
-    <h1>Spell Check</h1>
-   <grammarly-editor-plugin>
+      try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        console.log(result);
+        displayResult(result);
+      } catch (error) {
+        console.error(error);
+      }
+    });
 
-    <textarea id="textInput" rows="10" placeholder="Type or paste your text here"></textarea>
-  </grammarly-editor-plugin>
+    function displayResult(result) {
+      const resultContainer = document.getElementById('resultContainer');
+      resultContainer.innerHTML = '';
 
-  <script src="https://cdn.jsdelivr.net/npm/@grammarly/editor-sdk?clientId=client_APqHT7xcD7om4jmF5WtCXB"></script>
+      result.spellcheck.forEach(function(token) {
+        const tokenText = token.word;
+        const suggestions = token.suggestions;
 
+        const tokenResult = document.createElement('div');
+        tokenResult.classList.add('tokenResult');
+        tokenResult.innerHTML = '<strong>' + tokenText + '</strong> (Corrects to: <em>' + suggestions.join(', ') + '</em>)';
+        resultContainer.appendChild(tokenResult);
+      });
+    }
+  </script>
 </body>
 </html>
