@@ -109,15 +109,21 @@
       const resultContainer = document.getElementById('resultContainer');
       resultContainer.innerHTML = '';
 
-      result.spellcheck.forEach(function(token) {
-        const tokenText = token.word;
-        const suggestions = token.suggestions;
+      if (result.spellcheck && result.spellcheck.length > 0) {
+        result.spellcheck.forEach(function(token) {
+          const tokenText = token.word;
+          const suggestions = token.suggestions;
 
-        const tokenResult = document.createElement('div');
-        tokenResult.classList.add('tokenResult');
-        tokenResult.innerHTML = '<strong>' + tokenText + '</strong> (Corrects to: <em>' + suggestions.join(', ') + '</em>)';
-        resultContainer.appendChild(tokenResult);
-      });
+          const tokenResult = document.createElement('div');
+          tokenResult.classList.add('tokenResult');
+          tokenResult.innerHTML = '<strong>' + tokenText + '</strong> (Corrects to: <em>' + suggestions.join(', ') + '</em>)';
+          resultContainer.appendChild(tokenResult);
+        });
+      } else {
+        const noErrorsMessage = document.createElement('div');
+        noErrorsMessage.innerHTML = '<strong>No spelling errors found!</strong>';
+        resultContainer.appendChild(noErrorsMessage);
+      }
     }
   </script>
 </body>
