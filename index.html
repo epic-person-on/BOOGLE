@@ -238,8 +238,19 @@
           adContent.classList.add('ad-content');
           adContent.textContent = ad.content;
           adElement.appendChild(adContent);
+          
+          const description = document.createElement('p');
+          description.classList.add('ad-description');
+          description.textContent = "This is an advertisement";
+          
+          adElement.appendChild(titleLink);
+          adElement.appendChild(displayUrl);
+          adElement.appendChild(content);
+          adElement.appendChild(description);
+
 
           adsContainer.appendChild(adElement);
+          
         });
 
         searchResultsDiv.appendChild(adsContainer);
