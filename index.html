@@ -70,9 +70,14 @@
       margin-top: 5px;
       font-size: 14px;
     }
+    
 
     .organic-result {
       margin-bottom: 10px;
+    }
+    p{
+      color: #006621;
+      font-size: 8px;
     }
 
     .result-title {
@@ -240,6 +245,11 @@
           adContent.classList.add('ad-content');
           adContent.textContent = ad.content;
           adElement.appendChild(adContent);
+          
+          const adDescription = document.createElement('p');
+          adDescription.classList.add('ad-description');
+          adDescription.textContent = 'This is an advertisement';
+          adElement.appendChild(adDescription);
 
           adsContainer.appendChild(adElement);
         });
