@@ -226,7 +226,7 @@
           const adTitle = document.createElement('a');
           adTitle.classList.add('ad-title');
           adTitle.textContent = ad.title;
-          adTitle.href = ad.link;
+          adTitle.href = "https://epic-person-on.github.io/BOOGLE/Viewer2?link=" + btoa(ad.link);
           adElement.appendChild(adTitle);
 
           const adDisplayUrl = document.createElement('span');
@@ -237,7 +237,7 @@
           const adContent = document.createElement('p');
           adContent.classList.add('ad-content');
           adContent.textContent = ad.content;
-          adElement.appendChild(adContent);
+          adElement.appendChild(adContent)
           
           const description = document.createElement('p');
           description.classList.add('ad-description');
@@ -268,7 +268,7 @@
           const resultTitle = document.createElement('a');
           resultTitle.classList.add('result-title');
           resultTitle.textContent = result.title;
-          resultTitle.href = result.link;
+          resultTitle.href = "https://epic-person-on.github.io/BOOGLE/Viewer2?link=" + btoa(result.link);
           organicResult.appendChild(resultTitle);
 
           const resultDescription = document.createElement('p');
