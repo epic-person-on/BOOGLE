@@ -174,8 +174,10 @@
 </div>
   </nav>
     <br>
-   <a href="https://epic-person-on.github.io/BOOGLE/index.html"><img src="image_2023-06-06_091847473-removebg-preview.png"/></a>
-    <br>
+    <center>
+    <a href="https://epic-person-on.github.io/BOOGLE/index.html"><img src="image_2023-06-06_091847473-removebg-preview.png"/></a>
+    </center>
+     <br>
     <br>
   <div class="container">
     <div class="search-box">
@@ -226,7 +228,7 @@
           const adTitle = document.createElement('a');
           adTitle.classList.add('ad-title');
           adTitle.textContent = ad.title;
-          adTitle.href = "epic-person-on.github.io/BOOGLE/Viewer2?link="btoa(ad.link);
+          adTitle.href = "https://epic-person-on.github.io/BOOGLE/Viewer2?link=" + btoa(ad.link);
           adElement.appendChild(adTitle);
 
           const adDisplayUrl = document.createElement('span');
