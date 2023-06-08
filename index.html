@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Search API Website</title>
+  <link rel="icon" type="image/png" href="Screenshot 2023-06-02 8.59.41 AM.png"/>
+  <title>BOOGLE</title>
   <style>
     * {
       box-sizing: border-box;
@@ -39,10 +40,11 @@
       padding: 10px 20px;
       font-size: 16px;
       font-weight: bold;
-      background-color: #f2f2f2;
+      background-color: #4285f4;;
       border: 1px solid #ccc;
       border-radius: 2px;
       cursor: pointer;
+      
     }
 
     .search-results {
@@ -102,9 +104,79 @@
     .answers-container li {
       margin-bottom: 5px;
     }
+     nav {
+      background-color: lightgray;
+      padding: 10px;
+    }
+
+    nav .search-container {
+      justify-content: center;
+    }
+
+    .dropbtn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #f1f1f1}
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+      background-color: #3e8e41;
   </style>
 </head>
 <body>
+  <nav>
+    
+<div class="dropdown">
+<img src="Screenshot 2023-06-02 9.48.24 AM.png"/>
+  <div class="dropdown-content">
+    <a href="bnake.html">bnake</a>
+    <a href="booglespellcheck.html">Spell Check</a>
+    <a href="boutube.html">Boutube</a>
+    <a href="translate.html">Boogle Translate</a>
+    <a href="webviewer.html">Web Viewer</a>
+   </div>
+</div>
+  </nav>
+    <br>
+   <a href="https://epic-person-on.github.io/BOOGLE/index.html"><img src="image_2023-06-06_091847473-removebg-preview.png"/></a>
+    <br>
+    <br>
   <div class="container">
     <div class="search-box">
       <input type="text" id="searchInput" class="search-input" placeholder="Enter your search query">
@@ -154,7 +226,7 @@
           const adTitle = document.createElement('a');
           adTitle.classList.add('ad-title');
           adTitle.textContent = ad.title;
-          adTitle.href = ad.link;
+          adTitle.href = "epic-person-on.github.io/BOOGLE/Viewer2?link="btoa(ad.link);
           adElement.appendChild(adTitle);
 
           const adDisplayUrl = document.createElement('span');
