@@ -56,27 +56,7 @@
         console.error(error);
       }
     }
-    const url = 'https://chatgpt-4-bing-ai-chat.p.rapidapi.com/ask';
-    const options = {
-    	method: 'POST',
-    	headers: {
-    		'content-type': 'application/json',
-    		'X-RapidAPI-Key': '3b143502a0mshe887b77a672d0b8p10626cjsnaf8a412d73d3',
-    		'X-RapidAPI-Host': 'chatgpt-4-bing-ai-chat.p.rapidapi.com'
-    	},
-    	body: {
-    		question: ''+ query +'',
-    		bing_u_cookie: '1kEujtP1qhYR8kvLZCJXHaLF17JrPmeu190TRvgdTOtSBDM9zAubcH3nb3Bv_tJX6Wv9pZCQ_S1HxnqwRCVlo_611CIRZ7IujzAEq3GcZdlNNIeKMzKf2jkM3wvJY38VgEzcYTWawlDSP6z0xsqreoOCsDpJdW-raHiKakkH46CL9k9CNI7zSaD2Xwet87r0UwrC2rbW7HvdgRHEZbdtTZw'
-    	}
-    };
     
-    try {
-    	const response = await fetch(url, options);
-    	const result = await response.text();
-    	console.log(result);
-    } catch (error) {
-    	console.error(error);
-    }
 
     function displaySearchResults(response) {
       const searchResultsDiv = document.getElementById('searchResults');
