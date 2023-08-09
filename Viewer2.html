@@ -50,20 +50,7 @@
     // Decode the Base64 link and set it as the source for the iframe
     var decodedLink = decodeBase64Link(encodedLink);
     document.getElementById('myFrame').src = decodedLink;
-    // Check for the error message in the console
-    if (window.console && window.console.error) {
-      const userResponse = confirm("An error occurred in the iframe. Do you want to proceed? if you press yes you will be redirected to the webpage if you press no nothing will happen");
-            
-      if (userResponse) {
-               // Code to execute when the user presses 'Yes'
-        window.location.href = decodedLink;
-
-                // You can add your custom action here
-        } else {
-                // Code to execute when the user presses 'No'
-          alert(ok);
-            }
-    }
+    
 
   </script>
 </body>
