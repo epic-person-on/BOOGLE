@@ -1,6 +1,10 @@
 <!DOCTYPE html>
+<html lang="en">
+
 <html>
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="Screenshot 2023-06-02 8.59.41 AM.png"/>
   <title>BOOGLE</title>
   <link rel="stylesheet" href="index.css">
@@ -24,133 +28,60 @@
   </center>
   <br>
   <br>
-    <div class="container">
-    <div class="search-box">
-      <input type="text" id="searchInput" class="search-input" placeholder="Enter your search query">
-      <button id="searchButton" class="search-button">Search</button>
-    </div>
-    <div id="searchResults" class="search-results"></div>
-  </div>
- <br>
-  <script>
-    document.getElementById('searchButton').addEventListener('click', performSearch);
 
-    async function performSearch() {
-      const query = encodeURIComponent(document.getElementById('searchInput').value);
-      const url = `https://seo-api.p.rapidapi.com/v1/search/q=${query}&num=30`;
-      const options = {
-        method: 'GET',
-        headers: {
-          'X-Proxy-Location': 'US',
-          'X-User-Agent': 'desktop',
-          'X-RapidAPI-Key': '3b143502a0mshe887b77a672d0b8p10626cjsnaf8a412d73d3',
-          'X-RapidAPI-Host': 'seo-api.p.rapidapi.com'
-        }
-      };
+  
+</head>
+<body>
+  <div class="search-container">
+    <form id="search-form">
+      <input type="text" id="search-input" placeholder="Search...">
+      <button type="submit">Search</button>
+    </form>
+    <ul id="search-results" class="search-results"></ul>
+  </div>
+  <script>
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    const searchResultsList = document.getElementById('search-results');
+
+    searchForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const query = searchInput.value;
+      const results = await performSearch(query);
+      displayResults(results);
+    });
+
+    async function performSearch(query) {
+      const apiKey = 'AIzaSyDDynEjIwNZ4smHniiBoWrlx6EIE0gxvaI';
+      const cx = 'a58e5a5b7b74f492b';
+      const encodedQuery = encodeURIComponent(query);
+      const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${cx}&q=${encodedQuery}`;
 
       try {
-        const response = await fetch(url, options);
-        const result = await response.json();
-        displaySearchResults(result);
+        const response = await fetch(url);
+        const data = await response.json();
+        return data.items; // Returns an array of search results
       } catch (error) {
-        console.error(error);
+        console.error('Error performing search:', error);
+        return [];
       }
     }
-    
 
-    function displaySearchResults(response) {
-      const searchResultsDiv = document.getElementById('searchResults');
-      searchResultsDiv.innerHTML = '';
-
-      // Display ads
-      if (response.ads && response.ads.length > 0) {
-        const adsContainer = document.createElement('div');
-        adsContainer.classList.add('ads-container');
-
-        response.ads.forEach(ad => {
-          const adElement = document.createElement('div');
-          adElement.classList.add('ad');
-
-          const adTitle = document.createElement('a');
-          adTitle.classList.add('ad-title');
-          adTitle.textContent = ad.title;
-          adTitle.href = "https://epic-person-on.github.io/BOOGLE/Viewer2?link=" + btoa(ad.link);
-          adElement.appendChild(adTitle);
-
-          const adDisplayUrl = document.createElement('span');
-          adDisplayUrl.classList.add('ad-display-url');
-          adDisplayUrl.textContent = ad.displayUrl;
-          adElement.appendChild(adDisplayUrl);
-
-          const adContent = document.createElement('p');
-          adContent.classList.add('ad-content');
-          adContent.textContent = ad.content;
-          adElement.appendChild(adContent)
-          
-          const description = document.createElement('p');
-          description.classList.add('ad-description');
-          description.textContent = "This is an advertisement";
-          
-          adElement.appendChild(titleLink);
-          adElement.appendChild(displayUrl);
-          adElement.appendChild(content);
-          adElement.appendChild(description);
-
-
-          adsContainer.appendChild(adElement);
-          
-        });
-
-        searchResultsDiv.appendChild(adsContainer);
-      }
-
-      // Display organic search results
-      if (response.results && response.results.length > 0) {
-        const organicResultsContainer = document.createElement('div');
-        organicResultsContainer.classList.add('organic-results-container');
-
-        response.results.forEach(result => {
-          const organicResult = document.createElement('div');
-          organicResult.classList.add('organic-result');
-
-          const resultTitle = document.createElement('a');
-          resultTitle.classList.add('result-title');
-          resultTitle.textContent = result.title;
-          resultTitle.href = "https://epic-person-on.github.io/BOOGLE/Viewer2?link=" + btoa(result.link);
-          organicResult.appendChild(resultTitle);
-
-          const resultDescription = document.createElement('p');
-          resultDescription.classList.add('result-description');
-          resultDescription.textContent = result.description;
-          organicResult.appendChild(resultDescription);
-
-          organicResultsContainer.appendChild(organicResult);
-        });
-
-        searchResultsDiv.appendChild(organicResultsContainer);
-      }
-
-      // Display answers
-      if (response.answers && response.answers.length > 0) {
-        const answersContainer = document.createElement('div');
-        answersContainer.classList.add('answers-container');
-
-        const answersTitle = document.createElement('h2');
-        answersTitle.textContent = 'Answers';
-        answersContainer.appendChild(answersTitle);
-
-        const answersList = document.createElement('ul');
-        response.answers.forEach(answer => {
-          const answerItem = document.createElement('li');
-          answerItem.textContent = answer;
-          answersList.appendChild(answerItem);
-        });
-
-        answersContainer.appendChild(answersList);
-
-        searchResultsDiv.appendChild(answersContainer);
-      }
+    function displayResults(results) {
+      searchResultsList.innerHTML = '';
+      results.forEach(result => {
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = "https://epic-person-on.github.io/BOOGLE/Viewer2?link=" + btoa(result.link);
+        link.textContent = result.title;
+        const snippet = document.createElement('p');
+        snippet.textContent = result.snippet;
+        listItem.appendChild(link);
+        listItem.appendChild(snippet);
+        searchResultsList.appendChild(listItem);
+      });
     }
   </script>
 </body>
 </html>
+    
