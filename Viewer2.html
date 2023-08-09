@@ -52,17 +52,17 @@
     document.getElementById('myFrame').src = decodedLink;
     // Check for the error message in the console
     if (window.console && window.console.error) {
-      var originalError = console.error;
-      console.error = function(message) {
-        if (message.indexOf("Refused to display") !== -1 && message.indexOf("X-Frame-Options") !== -1) {
-          // Display custom message or perform desired action
-          console.log("Error: The website cannot be displayed due to security restrictions.");
-          // Your code to handle the error goes here
-          // For example, you can redirect the user to a different page or display an error message on the website
-        }
-        // Call the original console.error() method
-        originalError.apply(console, arguments);
-      };
+      const userResponse = confirm("An error occurred in the iframe. Do you want to proceed? if you press yes you will be redirected to the webpage if you press no nothing will happen");
+            
+      if (userResponse) {
+               // Code to execute when the user presses 'Yes'
+        window.location.href = decodedLink;
+
+                // You can add your custom action here
+        } else {
+                // Code to execute when the user presses 'No'
+          alert(ok);
+            }
     }
 
   </script>
