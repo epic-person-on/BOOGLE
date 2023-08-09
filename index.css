@@ -8,41 +8,13 @@
       padding: 0;
     }
 
-    .container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-      background-color: #f2f2f2;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    }
+    
 
-    .search-box {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-    }
+   
 
-    .search-input {
-      flex: 1;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 2px;
-    }
 
-    .search-button {
-      padding: 10px 20px;
-      font-size: 16px;
-      font-weight: bold;
-      background-color: #f2f2f2;
-      border: 1px solid #ccc;
-      border-radius: 2px;
-      cursor: pointer;
-    }
+ 
 
-    .search-results {
-      margin-top: 20px;
-    }
 
     .ad {
       margin-bottom: 10px;
@@ -62,41 +34,7 @@
     .ad-content {
       margin-top: 5px;
       font-size: 14px;
-    }
-
-    .organic-result {
-      margin-bottom: 10px;
-    }
-
-    .result-title {
-      font-weight: bold;
-      color: #1a0dab;
-      text-decoration: none;
-    }
-
-    .result-description {
-      margin-top: 5px;
-      color: #545454;
-    }
-
-    .answers-container {
-      margin-top: 20px;
-    }
-
-    .answers-container h2 {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .answers-container ul {
-      padding-left: 20px;
-      margin-top: 0;
-    }
-
-    .answers-container li {
-      margin-bottom: 5px;
-    }
+    }  
     nav {
       background-color: lightgray;
       padding: 10px;
@@ -151,63 +89,64 @@
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
-    .search-container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
+.search-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
-    #search-form {
-      display: flex;
-      margin-bottom: 20px;
-    }
+#search-form {
+  display: flex;
+  margin-bottom: 20px;
+}
 
-    #search-input {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid #ccc;
-    }
+#search-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
 
-    #search-input:focus {
-      outline: none;
-    }
+#search-input:focus {
+  outline: none;
+}
 
-    button {
-      padding: 10px 20px;
-      background-color: #4285F4;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-    }
+button {
+  padding: 10px 20px;
+  background-color: #4285F4;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
 
-    button:hover {
-      background-color: #357AE8;
-    }
+button:hover {
+  background-color: #357AE8;
+}
 
-    .search-results {
-      list-style: none;
-      padding: 0;
-    }
+.search-results {
+  list-style: none;
+  padding: 0;
+}
 
-    .search-results li {
-      margin-bottom: 20px;
-    }
+.search-results li {
+  margin-bottom: 20px;
+}
 
-    .search-results a {
-      color: #1A0DAB;
-      text-decoration: none;
-    }
+.search-results a {
+  color: #1A0DAB;
+  text-decoration: none;
+}
 
-    .search-results a:hover {
-      text-decoration: underline;
-    }
+.search-results a:hover {
+  text-decoration: underline;
+}
 
-    .search-results p {
-      margin: 5px 0;
-      color: #545454;
-    }
+.search-results p {
+  margin: 5px 0;
+  color: #545454;
+}
+
