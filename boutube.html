@@ -101,7 +101,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      const apiKey = "AIzaSyCmLW1y_He5wmvH3dMt1B-LW_Ox6DoLhb8"; // Replace with your actual API key
+      const apiKey = process.env.BOUTUBE_API_KEY; // Replace with your actual API key
       const searchButton = document.getElementById("searchButton");
       const searchQueryInput = document.getElementById("searchQuery");
       const resultsContainer = document.getElementById("results");
