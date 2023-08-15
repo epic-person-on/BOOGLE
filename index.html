@@ -125,8 +125,9 @@
     });
 
     async function performSearch(query) {
-      const apiKey = 'AIzaSyDDynEjIwNZ4smHniiBoWrlx6EIE0gxvaI';
-      const cx = 'a58e5a5b7b74f492b';
+      const config = require('./config.js');
+      const apiKey = config.BOOGLE_API_KEY;
+      const cx = config.BOOGLE_CX;
       const encodedQuery = encodeURIComponent(query);
       const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${cx}&q=${encodedQuery}`;
 
