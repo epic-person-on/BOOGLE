@@ -125,7 +125,7 @@
     });
 
     async function performSearch(query) {
-      const config = require('./config.js');
+      const config = fetch('./config.js');
       const apiKey = config.BOOGLE_API_KEY;
       const cx = config.BOOGLE_CX;
       const encodedQuery = encodeURIComponent(query);
